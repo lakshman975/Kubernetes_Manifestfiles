@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: nginx-rs
+  labels:
+    app: nginx
+    tier: frontend
+spec:
+  # modify replicas according to your case
+  replicas: 3  # 3 pods will be created
+  selector: # replica-set labels
+    matchLabels:
+      app: nginx
+      tier: frontend
+  template: # pod-definition
+    metadata:
+      labels:
+        app: nginx
+        tier: frontend
+    spec:
+      containers:
+      - name: nginx
+        image: nginx
+
+
+# Replica set is used to repliate the pods
+# Pod is a subset of replica set
+# Replica set can't update the version so we use deployment sets
+
+
+# To get list of replica sets
+# kubectl get rs

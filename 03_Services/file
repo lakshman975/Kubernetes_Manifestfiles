@@ -1,0 +1,12 @@
+If we want to expose pods to other application or outside we must use services.
+
+1.Cluster IP   - Internal
+2.NodePort     - External - we can expose to outside world
+3.Loadbalancer - Exteranl with LB
+
+
+
+To get the list of services 
+kubectl get services
+(or)
+kubectl get svc
