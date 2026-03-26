@@ -1,0 +1,45 @@
+
+Authentication - EKS will use IAM to authenticate.
+Authorization  - From EKS side
+
+
+1.To set Authentication:
+Create IAM user and add EKS policies what ever you want.
+Create role and role bindings in manifestfile.
+
+2.To Set Authorization:
+To integrate the IAM user with EKS we have to edit the aws-auth file
+
+Command to ge the aws auth configration file:
+kubectl get configmap aws-auth -n kube-system -o yaml
+
+We have to add the user name and userarn 
+
+
+
+## Command to run
+
+## git clone https://github.com/hari-palepu/21_Kubernetes_Manifestfiles.git
+## kubectl apply -f ramesh.yaml
+## kubectl apply -f aws-auth.yaml
+
+
+
+## To Test the RBAC:
+Create a linux server
+Login to the server
+Take ramesh console acess ID&key and do aws configure
+once it is configured run the below command to verify the identity of the user
+aws sts get-caller-identity
+
+To create the kubeconfig use below
+aws eks update-kubeconfig --region us-east-1 --name roboshop-cluster 
+aws eks update-kubeconfig --region <region_name> --name <cluster_name>
+
+ 
+# Install kubectl client 
+curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+chmod +x kubectl
+sudo mv kubectl /usr/local/bin/kubectl
+kubectl version --client
+

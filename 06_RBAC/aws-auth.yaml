@@ -1,0 +1,40 @@
+apiVersion: v1
+data:
+  mapRoles: |
+    - groups:
+      - system:bootstrappers
+      - system:nodes
+      rolearn: arn:aws:iam::004316194461:role/eksctl-roboshop-nodegroup-spot-NodeInstanceRole-JblbTEAJmMKP
+      username: system:node:{{EC2PrivateDNSName}}
+  mapUsers: |
+    - groups:
+      - roboshop-pod-reader
+      userarn: arn:aws:iam::004316194461:user/ramesh
+      username: ramesh
+    - groups:
+      - roboshop-admin
+      userarn: arn:aws:iam::004316194461:user/raheem
+      username: raheem
+kind: ConfigMap
+metadata:
+  name: aws-auth
+  namespace: kube-system
+  uid: b0f7f7f5-ca8e-41cd-91c9-2617746ae144
+
+
+
+##Replace with your username and userarn in the above script.
+
+# 1.To set Authentication:
+# Create IAM user and add EKS policies what ever you want.
+# Create role and role bindings
+
+# 2.To Set Authorization:
+# To integrate the IAM user with EKS we have to edit the aws-auth file
+
+# Command to get the aws auth configration file:
+# kubectl get configmap aws-auth -n kube-system -o yaml
+
+# We have to add the user name and userarn 
+
+

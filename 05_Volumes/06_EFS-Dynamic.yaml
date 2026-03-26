@@ -1,0 +1,57 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: efs-dynamic
+spec:
+  accessModes:
+    - ReadWriteMany #As efs can be attached to multiple servers
+  storageClassName: efs-sc-roboshop #From 06_EFS-Storageclass.yaml
+  resources:
+    requests:
+      storage: 5Gi
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: efs-dynamic-pod
+  labels:
+    demo: efs-dynamic
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+    volumeMounts:
+    - name: nginx-data
+      mountPath: /usr/share/nginx/html
+  volumes:
+  - name: nginx-data
+    persistentVolumeClaim:
+      claimName: efs-dynamic
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: efs-dynamic
+spec:
+  type: LoadBalancer
+  selector:
+    demo: efs-dynamic
+  ports:
+  - protocol: TCP
+    port: 80 #service-port
+    targetPort: 80 #container-port
+
+## Create an EFS filesystem with eks cluster VPC it will create one SG automatically
+## To connect worker nodes to EFS we have to edit the EFS SG. add workernode SG in EFS inboud allowing NFS-2049 port.
+## Assign EFS full access role to workernode
+## Install EFS-csi drivers in workstation
+## kubectl kustomize \
+#   "github.com/kubernetes-sigs/aws-efs-csi-driver/deploy/kubernetes/overlays/stable/ecr/?ref=release-1.7" > private-ecr-driver.yaml
+## After installing the drivers we can see private-ecr-driver.yaml
+## kubectl apply -f private-ecr-driver.yaml
+## Create pv and pvc
+
+## kubectl apply -f 06_EFS-StorageClass.yaml
+## kubectl get sc
+## kubectl apply -f 06_EFS-Dynamic.yaml
+##Now it will create an access point in EFS
