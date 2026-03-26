@@ -1,0 +1,5 @@
+## Taint command
+kubectl taint nodes <NameOfTheNode> project=roboshop:NoSchedule
+
+## Untaint command
+kubectl taint nodes <NameOfTheNode> <Key>=<Value>:<Effect>-

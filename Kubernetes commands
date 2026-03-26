@@ -1,0 +1,96 @@
+
+## To get list of namespaces 
+kubectl get ns (or) kubectl get namespace
+kubectl get nodes
+kubectl get pods 
+
+## To get list of pods from specif namespace 
+kubectl get pods -n <Namespace_name>
+
+## To get full info about pod
+kubectl describe pod <pod_name>
+
+kubectl get pod -o wide
+
+
+## To delete a namespace 
+kubectl delete -f <.yaml file name>
+
+
+## To get list of config maps
+kubectl get configmaps
+
+## To get full info about congifmap
+kubectl describe configmap <configmap_name>
+
+## To get list of secrets
+kubectl get secrets
+
+
+
+
+## To create a namespace 
+kubectl create -f <.yaml file name>
+(or)
+kubectl apply -f namespace.yaml
+
+## To delete a namespace 
+kubectl delete -f <.yaml file name>
+
+## To login to a specif container inside a pod
+kubectl exec -it <pod_name> -c <container_name> -- <command_name> 
+commnad == bash or sh etc
+
+
+
+## To get the list of services 
+kubectl get services
+(or)
+kubectl get svc
+kubectl get services -n <Namespace_name>
+
+
+## To get list of replica sets
+kubectl get rs
+kubectl get rs -n <Namespace_name>
+
+## To get list of deployment sets
+kubectl get deployment
+kubectl get deployment -n <Namespace_name>
+
+
+## To set custom namespace as default namespace then no need to give -n
+sudo git clone https://github.com/ahmetb/kubectx /opt/kubectx
+sudo ln -s /opt/kubectx/kubens /usr/local/bin/kubens
+kubens <Namespace_name>
+
+
+## To get storage class 
+kubectl get sc
+
+## To get list of api resources
+kubectl api-resources
+
+
+## To get list of HPA
+kubectl get hpa
+
+
+
+## To upgrade
+aws eks update-kubeconfig --region <Region_code> --name <Cluster_name>
+
+## Taint command
+kubectl taint nodes <NameOfTheNode> <Key>=<Value>:<Effect>
+Effect = NoExecute,NoSchedule,PreferNoSchedule
+
+## Untaint command
+kubectl taint nodes <NameOfTheNode> <Key>=<Value>:<Effect>-
+
+
+
+
+
+
+
+
