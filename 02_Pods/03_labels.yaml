@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: label-pod
+  labels:
+    course: DevOps
+    Trainer: "SivakumarReddy"
+spec:
+  # list of containers
+  containers:
+  - name: label-container
+    image: nginx
+    ports:
+    - containerPort: 80

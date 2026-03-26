@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: config-pod
+spec:
+  # list of containers
+  containers:
+  - name: config-container
+    image: nginx
+    #here with this line port will not be opened, just for information
+    ports:
+    - containerPort: 80
+    env:
+    - name: course    #Name of the key
+      valueFrom:
+        configMapKeyRef:
+          name: config01 #Name of the config map in 07_config_maps file 4th line.
+          key: course #Key name from 6th line the course value will come here if we apply the manifest file.
+    - name: trainer   #Name of the key
+      valueFrom:
+        configMapKeyRef:
+          name: config01
+          key: trainer #Key name from 7th line
+
+## create a config map first kubectl apply -f 07_config_maps.yaml then then apply 08_pod_config.yaml
+## Instead of harcoding the key values here we can directly refer the configmap file.
+
+
+

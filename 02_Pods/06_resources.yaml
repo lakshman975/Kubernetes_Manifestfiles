@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod01   #Name of the Pod
+spec:
+  # list of containers
+  containers:
+  - name: container01  #Name of the container
+    image: nginx
+    #The below port will not be open, just for information
+    ports:
+    - containerPort: 80
+    resources:
+      requests:   #Min cpu and ram this comainter can block to use
+        cpu: "100m"
+        memory: "68Mi"
+      limits:     #Man cpu and ram this comainter can block to use
+        cpu: "200m"
+        memory: "128Mi"
+
+
+## Limits shouldbe equal or greater than requests.

@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: annotations-pod
+  labels: #Used to attach resources(pod) to kubernetes.
+    course: DevOps
+    Trainer: "SivakumarReddy"
+  annotations:  #Used to attach external resources to kubernetes.
+    com.roboshop.training.duration: "120 hours"
+    jenkins.url: "https://jenkins.com/roboshop/catalogue#45"
+spec:
+  # list of containers
+  containers:
+  - name: annotations-container
+    image: nginx
+    ports:
+    - containerPort: 80
